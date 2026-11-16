@@ -1,1 +1,164 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uma perguntinha ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffb6d5, #ffcce5, #ffe6f0);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background: white;
+    padding: 40px 25px;
+    border-radius: 25px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 35px #d66b9c55;
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    color: #e75491;
+    margin-bottom: 15px;
+    font-size: 29px;
+}
+
+p {
+    color: #777;
+    margin-bottom: 30px;
+}
+
+button {
+    border: none;
+    padding: 14px 27px;
+    border-radius: 30px;
+    font-size: 17px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#sim {
+    background: #ff5c9d;
+    color: white;
+}
+
+#nao {
+    background: #eeeeee;
+    color: #555;
+    position: absolute;
+}
+
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    min-height: 55px;
+}
+
+#mensagem {
+    color: #e75491;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 25px;
+    line-height: 1.5;
+}
+
+.coracao {
+    position: fixed;
+    bottom: -30px;
+    animation: subir 6s linear infinite;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+@keyframes subir {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>💕 Uma perguntinha...</h1>
+
+    <p>Você me ama?</p>
+
+    <div class="botoes">
+        <button id="sim" onclick="responder()">Sim ❤️</button>
+        <button id="nao" onmouseover="fugir()" ontouchstart="fugir()" onclick="fugir()">Não 😈</button>
+    </div>
+
+    <div id="mensagem"></div>
+</div>
+
+<script>
+let cliques = 0;
+
+function responder() {
+    cliques++;
+
+    if (cliques === 1) {
+        document.getElementById("mensagem").innerHTML =
+        "Você tem certeza? 🥺💕";
+    }
+
+    else {
+        document.getElementById("mensagem").innerHTML =
+        "Muitooo obrigado!! ❤️<br>Também te amo muitooo! 🥹💕";
+
+        document.getElementById("sim").style.display = "none";
+        document.getElementById("nao").style.display = "none";
+    }
+}
+
+function fugir() {
+    const botao = document.getElementById("nao");
+
+    const maxX = window.innerWidth - botao.offsetWidth - 20;
+    const maxY = window.innerHeight - botao.offsetHeight - 20;
+
+    botao.style.position = "fixed";
+    botao.style.left = Math.max(10, Math.random() * maxX) + "px";
+    botao.style.top = Math.max(10, Math.random() * maxY) + "px";
+}
+
+function criarCoracao() {
+    const coracao = document.createElement("div");
+    coracao.className = "coracao";
+    coracao.innerHTML = "❤️";
+    coracao.style.left = Math.random() * 100 + "vw";
+    coracao.style.fontSize = (15 + Math.random() * 20) + "px";
+
+    document.body.appendChild(coracao);
+
+    setTimeout(() => coracao.remove(), 6000);
+}
+
+setInterval(criarCoracao, 500);
+</script>
+
+</body>
+</html>
+
